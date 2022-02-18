@@ -15,6 +15,12 @@
                 Add Product
             </button>
             <br>
+            @if (session()->has('success'))
+                <div align="center" class="alert alert-success">
+                    {{ session()->get('success') }}
+                    <br>
+                </div>
+            @endif
             <br>
             <table class="table table-bordered" id="myTable">
                 <thead>
@@ -44,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
     <div class="modal fade" id="myModal">
@@ -63,24 +70,24 @@
                         <table>
                             <tr>
                                 <th>Product Name:</th>
-                                <th> <input type="text" class="form-control" name="product_name" id=""> </th>
+                                <th> <input type="text" required class="form-control" name="product_name" id=""> </th>
                             </tr>
                             <tr>
                                 <th>Description:</th>
-                                <th> <textarea name="description" class="form-control" id="" size="20"
+                                <th> <textarea name="description" required class="form-control" id="" size="20"
                                         rows="2"></textarea> </th>
                             </tr>
                             <tr>
                                 <th>Quantity:</th>
-                                <th> <input type="number" min="1" class="form-control" name="quantity" id=""> </th>
+                                <th> <input type="number" min="1" required class="form-control" name="quantity" id=""> </th>
                             </tr>
                             <tr>
                                 <th>Purchase Price:</th>
-                                <th> <input type="number" min="1" class="form-control" name="purchase_price" id=""> </th>
+                                <th> <input type="number" min="1" required class="form-control" name="purchase_price" id=""> </th>
                             </tr>
                             <tr>
                                 <th>Sales Price:</th>
-                                <th> <input type="number" min="1" class="form-control" name="sales_price" id=""> </th>
+                                <th> <input type="number" min="1" required class="form-control" name="sales_price" id=""> </th>
                             </tr>
                             <tr>
                                 <th>Image:</th>

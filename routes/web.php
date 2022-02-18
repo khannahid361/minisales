@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,10 @@ Route::group(['middleware' => ['auth', 'isUser', 'PreventBackHistory']], functio
 
 Route::group(['middleware' => 'auth'], function () {
     //Customer
-    Route::get('/customer');
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customers');
+    Route::get('/customer/edit/{customerId}', [CustomerController::class, 'edit'])->name('editCustomer');
+    Route::post('/customer/update/{customerId}', [CustomerController::class, 'update'])->name('updateCustomer');
+    Route::post('/customer', [CustomerController::class, 'store'])->name('addCustomer');
 
     //Product
     Route::get('/products', [ProductController::class, 'index'])->name('products');
