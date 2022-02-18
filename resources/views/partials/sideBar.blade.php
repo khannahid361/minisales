@@ -82,10 +82,7 @@
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Add New</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">List</a>
+                                        <a class="nav-link" href="{{ route('products') }}">List</a>
                                     </li>
                                 </ul>
                             </div>

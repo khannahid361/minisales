@@ -41,6 +41,15 @@ class SuperAdminController extends Controller
     }
     public function updateProfile(Request $request)
     {
-        return redirect()->back()->with('success', 'You have updated Your Profile');
+        $request->validate([
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+        $datas = User::where('id', auth()->user()->id)
+            ->update([
+                'password' => Hash::make($request->password),
+            ]);
+        if ($datas) {
+            return redirect()->back()->with('success', 'You have updated Your Profile');
+        }
     }
 }

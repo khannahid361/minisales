@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,7 @@ Route::group(['middleware' => ['auth', 'isAdmin', 'PreventBackHistory']], functi
 //Normal admin/User
 Route::group(['middleware' => ['auth', 'isUser', 'PreventBackHistory']], function () {
     Route::get('/Dashboard/admin', [AdminController::class, 'dashboard'])->name('userDashboard');
+    Route::post('/Update/Admin/info', [AdminController::class, 'changePassword'])->name('updatePassword');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -31,7 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customer');
 
     //Product
-    Route::get('/product');
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::post('/store/Product', [ProductController::class, 'store'])->name('storeProduct');
+    Route::post('/update/Product/{productId}', [ProductController::class, 'update'])->name('updateProduct');
+    Route::get('/edit/Product/{productId}', [ProductController::class, 'edit'])->name('editProduct');
 
     //Order
     Route::get('/order');
