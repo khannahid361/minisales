@@ -4,7 +4,7 @@
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="/admin/dashboard">Admin</a>
+            <a class="navbar-brand" href="">Admin</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,6 +27,17 @@
                                 <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->name }}</h5>
                                 <span class="status"></span><span class="ml-2">Available</span>
                             </div>
+                            @if (auth()->user()->role == 1)
+                                <a class="dropdown-item" href="{{ route('adminDashboard') }}">
+                                    <i class="fa fa-fw fa-user-circle"></i>
+                                    Profile</a>
+                            @endif
+                            @if (auth()->user()->role == 2)
+                                <a class="dropdown-item" href="{{ route('userDashboard') }}">
+                                    <i class="fa fa-fw fa-user-circle"></i>
+                                    Profile</a>
+                            @endif
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                     class="fas fa-sign-out-alt me-2"></i>Logout</a>
@@ -102,14 +113,14 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                 data-target="#submenu-4" aria-controls="submenu-4"><i
-                                    class="fab fa-fw fa-wpforms"></i>Slider</a>
+                                    class="fab fa-fw fa-wpforms"></i>Order</a>
                             <div id="submenu-4" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Add New</a>
+                                        <a class="nav-link" href="{{ route('getCustomer') }}">Add New</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/slider">List</a>
+                                        <a class="nav-link" href="{{ route('orders') }}">List</a>
                                     </li>
                                 </ul>
                             </div>
@@ -117,35 +128,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                 data-target="#submenu-5" aria-controls="submenu-5"><i
-                                    class="fas fa-fw fa-table"></i>Product & Stock</a>
+                                    class="fas fa-fw fa-table"></i>Stock Report</a>
                             <div id="submenu-5" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Add New</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/product">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">Add Stock</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/stock">Stock List</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                                data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>
-                                Order & Return </a>
-                            <div id="submenu-6" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">All Order</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">All Return</a>
+                                        <a class="nav-link" href="{{ route('stock') }}">Report</a>
                                     </li>
                                 </ul>
                             </div>

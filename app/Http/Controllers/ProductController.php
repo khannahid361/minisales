@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -73,5 +75,27 @@ class ProductController extends Controller
         if ($datas) {
             return redirect()->route('products')->with('success', 'Product Inserted !');
         }
+    }
+    public function stock()
+    {
+        $products = Product::with('cartitems')->get();
+        foreach ($products as $product) {
+            $product->sold = CartItem::where('product_id', $product->id)->sum('billed');
+            $product->stock = $product->quantity - $product->sold;
+        }
+        return view('product.stock', compact('products'));
+    }
+    public function stockPDF()
+    {
+        $products = Product::with('cartitems')->get();
+        foreach ($products as $product) {
+            $product->sold = CartItem::where('product_id', $product->id)->sum('billed');
+            $product->stock = $product->quantity - $product->sold;
+        }
+        $data = [
+            'products' =>  $products,
+        ];
+        $pdf = PDF::loadView('product.stockPDF', $data);
+        return $pdf->download('stock.pdf');
     }
 }

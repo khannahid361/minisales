@@ -42,8 +42,8 @@
                             </td>
                             <td>{{ $product->description }}</td>
                             <td>{{ $product->quantity }} pc's</td>
-                            <td>{{ $product->purchase_price }}</td>
-                            <td>{{ $product->sales_price }}</td>
+                            <td>{{ $product->purchase_price }} tk/=</td>
+                            <td>{{ $product->sales_price }} tk/=</td>
                             <td><a href="{{ route('editProduct', $product->id) }}" class="btn btn-outline-primary">Edit</a>
                             </td>
                         </tr>

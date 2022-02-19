@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
@@ -38,15 +39,28 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Product
     Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/products/stock', [ProductController::class, 'stock'])->name('stock');
+    Route::get('/products/stockPDF', [ProductController::class, 'stockPDF'])->name('stockPDF');
     Route::post('/store/Product', [ProductController::class, 'store'])->name('storeProduct');
     Route::post('/update/Product/{productId}', [ProductController::class, 'update'])->name('updateProduct');
     Route::get('/edit/Product/{productId}', [ProductController::class, 'edit'])->name('editProduct');
 
     //Order
-    Route::get('/order');
-
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/order/getCustomer', [OrderController::class, 'getCustomer'])->name('getCustomer');
+    Route::get('/order/getCart', [OrderController::class, 'getCart'])->name('getCart');
+    Route::post('/order/setCustomer', [OrderController::class, 'setCustomer'])->name('setCustomer');
+    Route::post('/order/addToCart', [OrderController::class, 'addToCart'])->name('addToCart');
+    Route::get('/remove/Cart/{id}', [OrderController::class, 'remove'])->name('removeCart');
+    Route::get('/findProduct/{productId}', [OrderController::class, 'findProduct'])->name('findProduct');
+    Route::get('/checkOut', [OrderController::class, 'checkOut'])->name('checkOut');
     //Invoice
-    Route::get('/invoice');
+    Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice');
+    Route::get('/invoicePDF/{id}', [OrderController::class, 'invoicePDF'])->name('invoicePDF');
+
+    Route::get('/', function () {
+        return view('admin');
+    });
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
