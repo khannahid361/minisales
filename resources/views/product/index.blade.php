@@ -73,7 +73,7 @@
                                 <th> <input type="text" required class="form-control" name="product_name" id=""> </th>
                             </tr>
                             <tr>
-                                <th>Description:</th>
+                               <th>Description:</th>
                                 <th> <textarea name="description" required class="form-control" id="" size="20"
                                         rows="2"></textarea> </th>
                             </tr>
